@@ -8,13 +8,14 @@ export default function Registration() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const nextErrors = {};
 
     if (!email.trim()) {
       nextErrors.email = "Email is required";
     } else if (!(email.includes("@") && email.endsWith(".com"))) {
-      nextErrors.email = "Enter a valid email address (must contain @ and end with .com)";
+      nextErrors.email =
+        "Enter a valid email address (must contain @ and end with .com)";
     }
 
     if (!password.trim()) {
@@ -27,12 +28,8 @@ export default function Registration() {
 
     setErrors(nextErrors);
 
-    // Stop execution if errors exist (Fixes the 13.33/20 deduction)
-    if (Object.keys(nextErrors).length > 0) {
-      return; 
-    }
+    if (Object.keys(nextErrors).length > 0) return;
 
-    // Alert only triggers if the return guard above is not met
     alert(`User Registered: ${email}`);
   };
 
@@ -76,7 +73,8 @@ export default function Registration() {
               value="male"
               checked={gender === "male"}
               onChange={(e) => setGender(e.target.value)}
-            /> Male
+            />{" "}
+            Male
           </label>
           <label className="radio">
             <input
@@ -85,15 +83,16 @@ export default function Registration() {
               value="female"
               checked={gender === "female"}
               onChange={(e) => setGender(e.target.value)}
-            /> Female
+            />{" "}
+            Female
           </label>
           {errors.gender && <p className="error">{errors.gender}</p>}
         </fieldset>
 
-        <button 
-          type="submit" 
-          className="btn" 
-          disabled={!email || !password || !gender}
+        <button
+          type="submit"
+          className="btn"
+          disabled={!email.trim() || !password.trim() || !gender}
         >
           Register
         </button>
